@@ -31,30 +31,21 @@ class Queue {
   }
 
   enqueue(value) {
-    const newNode = new ListNode(value);
-
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = newNode;
+    const node = { value, next: null };
+    if (this.tail) {
+      this.tail.next = node;
     } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
+      this.head = node;
     }
+    this.tail = node;
   }
 
   dequeue() {
-    if (!this.head) {
-      return null;
-    }
-
-    const removedValue = this.head.value;
+    if (!this.head) return undefined;
+    const value = this.head.value;
     this.head = this.head.next;
-
-    if (!this.head) {
-      this.tail = null;
-    }
-
-    return removedValue;
+    if (!this.head) this.tail = null;
+    return value;
   }
 }
 
